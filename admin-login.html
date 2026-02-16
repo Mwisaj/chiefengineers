@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Login - Chief Engineering Construction">
+    <title>Admin Login | Chief Engineering</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #d4af37;
+            --primary-dark: #b8941f;
+            --dark: #0a0e14;
+            --dark-soft: #1a1f2e;
+            --gray: #8b92a6;
+            --gray-light: #a0b3c5;
+            --white: #ffffff;
+            --shadow-lg: 0 24px 42px -12px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(212,175,55,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+            animation: slidePattern 20s linear infinite;
+        }
+
+        @keyframes slidePattern {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo/Brand Section */
+        .brand {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .brand-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .brand-icon i {
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .brand h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .brand p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Form Elements */
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1rem;
+            z-index: 1;
+        }
+
+        .form-control {
+            border: 2px solid #eef3f7;
+            border-radius: 12px;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        /* Remember Me Checkbox */
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-check-input {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 0.5rem;
+            border: 2px solid #eef3f7;
+            cursor: pointer;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .form-check-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Login Button */
+        .btn-login {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 40px;
+            padding: 0.9rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 8px 16px -6px rgba(212, 175, 55, 0.3);
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-login:hover {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -8px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-login i {
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .btn-login:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Back to Site Link */
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: var(--gray-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link a:hover {
+            color: var(--primary);
+        }
+
+        /* Alert Message */
+        .alert {
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid var(--white);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        .btn-login.loading .spinner {
+            display: inline-block;
+        }
+
+        .btn-login.loading span {
+            opacity: 0.7;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .brand h2 {
+                font-size: 1.5rem;
+            }
+
+            .brand-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .brand-icon i {
+                font-size: 2rem;
+            }
+        }
+
+        /* Footer Credit */
+        .credit {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--gray-light);
+            font-size: 0.85rem;
+            z-index: 1;
+        }
+
+        .credit a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .credit a:hover {
+            color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Brand Section -->
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <h2>Admin Portal</h2>
+                <p>Chief Engineering Construction</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="username" class="form-control" 
+                               placeholder="admin@chiefengineering.com" required>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" class="form-control" 
+                               placeholder="Enter your password" required>
+                    </div>
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="form-check">
+                    <input type="checkbox" id="rememberMe" class="form-check-input">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn-login" id="loginButton">
+                    <span>Login to Dashboard</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="spinner"></span>
+                </button>
+
+                <!-- Error/Success Messages -->
+                <div id="loginAlert" class="alert" role="alert"></div>
+            </form>
+
+            <!-- Back to Site Link -->
+            <div class="back-link">
+                <a href="index.html">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Website
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Credit -->
+    <div class="credit">
+        &copy; 2026 Chief Engineering Construction | <a href="https://mwisa-the-dev-io.vercel.app/">Jones Mwisa</a>
+    </div>
+
+    <!-- Bootstrap JS (optional, only if you need Bootstrap JS features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Firebase Modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            setPersistence, 
+            browserLocalPersistence, 
+            browserSessionPersistence,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBO1Qlu66KtqzC0XrnjgJyhoKLgOMUU1zo",
+            authDomain: "chiefengineering-49745.firebaseapp.com",
+            projectId: "chiefengineering-49745",
+            storageBucket: "chiefengineering-49745.firebasestorage.app",
+            messagingSenderId: "610373373596",
+            appId: "1:610373373596:web:d8ff0b7e89c917981c2759",
+            measurementId: "G-5FQLS2VMZZ"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // DOM Elements
+        const loginForm = document.getElementById("loginForm");
+        const loginButton = document.getElementById("loginButton");
+        const loginAlert = document.getElementById("loginAlert");
+
+        // Helper function to show alerts
+        function showAlert(message, type = "danger") {
+            loginAlert.textContent = message;
+            loginAlert.className = `alert alert-${type} show`;
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                loginAlert.classList.remove("show");
+            }, 5000);
+        }
+
+        // Helper function to set loading state
+        function setLoading(isLoading) {
+            if (isLoading) {
+                loginButton.classList.add("loading");
+                loginButton.disabled = true;
+            } else {
+                loginButton.classList.remove("loading");
+                loginButton.disabled = false;
+            }
+        }
+
+        // Form Submission Handler
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const email = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+            const rememberMe = document.getElementById("rememberMe").checked;
+
+            // Basic validation
+            if (!email || !password) {
+                showAlert("Please enter both email and password");
+                return;
+            }
+
+            try {
+                // Show loading state
+                setLoading(true);
+
+                // Set persistence based on Remember Me
+                if (rememberMe) {
+                    await setPersistence(auth, browserLocalPersistence);
+                } else {
+                    await setPersistence(auth, browserSessionPersistence);
+                }
+
+                // Attempt sign in
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Check if user is admin
+                if (user.email === "martinmwisa3@gmail.com") {
+                    showAlert("Login successful! Redirecting...", "success");
+                    
+                    // Redirect after short delay
+                    setTimeout(() => {
+                        window.location.href = "admin-dashboard.html";
+                    }, 1500);
+                } else {
+                    // Not an admin - sign out and show error
+                    await signOut(auth);
+                    showAlert("Access denied. Admin privileges required.");
+                    setLoading(false);
+                }
+
+            } catch (error) {
+                // Handle specific error messages
+                let errorMessage = "Login failed. ";
+                
+                switch (error.code) {
+                    case "auth/invalid-credential":
+                        errorMessage += "Invalid email or password.";
+                        break;
+                    case "auth/user-not-found":
+                        errorMessage += "User not found.";
+                        break;
+                    case "auth/wrong-password":
+                        errorMessage += "Incorrect password.";
+                        break;
+                    case "auth/too-many-requests":
+                        errorMessage += "Too many failed attempts. Please try again later.";
+                        break;
+                    default:
+                        errorMessage += error.message;
+                }
+                
+                showAlert(errorMessage);
+                setLoading(false);
+            }
+        });
+
+        // Optional: Add password visibility toggle
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.createElement("i");
+        togglePassword.className = "fas fa-eye";
+        togglePassword.style.cssText = `
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--gray);
+            z-index: 2;
+        `;
+
+        const passwordField = document.querySelector(".input-icon");
+        if (passwordField) {
+            passwordField.appendChild(togglePassword);
+            
+            togglePassword.addEventListener("click", () => {
+                const type = passwordInput.type === "password" ? "text" : "password";
+                passwordInput.type = type;
+                togglePassword.className = type === "password" ? "fas fa-eye" : "fas fa-eye-slash";
+            });
+        }
+
+        // Clear alert when user starts typing
+        [username, password].forEach(input => {
+            input.addEventListener("input", () => {
+                loginAlert.classList.remove("show");
+            });
+        });
+    </script>
+</body>
+</html>

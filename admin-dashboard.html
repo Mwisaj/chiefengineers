@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Dashboard - Chief Engineering Construction">
+    <title>Admin Dashboard | Chief Engineering</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #d4af37;
+            --primary-light: #f5e7c8;
+            --primary-dark: #b8941f;
+            --dark: #0a0e14;
+            --dark-soft: #1a1f2e;
+            --dark-card: #141821;
+            --gray: #8b92a6;
+            --gray-light: #a0b3c5;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 12px 28px -8px rgba(0,0,0,0.1);
+            --shadow-lg: 0 24px 42px -12px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* ===== SIDEBAR STYLES ===== */
+        .sidebar {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%);
+            color: var(--white);
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-icon i {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .brand-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .brand-sub {
+            font-size: 0.8rem;
+            color: var(--gray-light);
+            margin-left: 3.5rem;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0.75rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.875rem 1.25rem;
+            color: var(--gray-light);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            gap: 0.75rem;
+        }
+
+        .nav-link i {
+            width: 20px;
+            font-size: 1.1rem;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-link:hover i {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .nav-link.active i {
+            color: var(--dark);
+        }
+
+        .logout-link {
+            margin-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 1rem;
+        }
+
+        .logout-link .nav-link {
+            color: #dc3545;
+        }
+
+        .logout-link .nav-link i {
+            color: #dc3545;
+        }
+
+        .logout-link .nav-link:hover {
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-title h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title p {
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .notification-badge {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge i {
+            font-size: 1.3rem;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .notification-badge:hover i {
+            color: var(--primary);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: var(--dark);
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--white);
+            border-radius: 40px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .admin-profile:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-icon i {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+        }
+
+        .profile-info {
+            line-height: 1.3;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .profile-role {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon i {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title h4 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .view-all:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* Tables */
+        .table-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.03);
+            margin-bottom: 2rem;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table thead th {
+            border-bottom: 2px solid var(--primary-light);
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table td {
+            padding: 1rem 0.5rem;
+            vertical-align: middle;
+            color: var(--gray);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-progress {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            transition: var(--transition);
+            margin-right: 0.25rem;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quick-action-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--dark);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .quick-action-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-action-card span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                overflow: visible;
+            }
+
+            .sidebar-header .brand-text,
+            .sidebar-header .brand-sub,
+            .nav-link span {
+                display: none;
+            }
+
+            .nav-link {
+                justify-content: center;
+                padding: 0.875rem;
+            }
+
+            .nav-link i {
+                margin: 0;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-logo">
+                <div class="brand-icon">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <span class="brand-text">Chief Engineering</span>
+            </div>
+            <div class="brand-sub">Administrator</div>
+        </div>
+
+        <div class="sidebar-nav">
+            <!-- Main Navigation -->
+            <div class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="messages.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Projects</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Clients</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+
+            <!-- Logout Link -->
+            <div class="logout-link">
+                <div class="nav-item">
+                    <a href="#" id="logoutBtn" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="content-header">
+            <div class="header-title">
+                <h2>Welcome back, Admin</h2>
+                <p>Here's what's happening with your projects today.</p>
+            </div>
+            <div class="header-actions">
+                <div class="notification-badge">
+                    <i class="far fa-bell"></i>
+                    <span class="badge-count">3</span>
+                </div>
+                <div class="admin-profile">
+                    <div class="profile-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-name">Martin Mwisa</div>
+                        <div class="profile-role">Administrator</div>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>12</h3>
+                    <p>Total Projects</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>8</h3>
+                    <p>Unread Messages</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>20</h3>
+                    <p>Active Clients</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-info">
+                    <h3>5</h3>
+                    <p>Ongoing Projects</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Projects Table -->
+        <div class="table-card">
+            <div class="section-title">
+                <h4>Recent Projects</h4>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Client</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Silverest Paving</td>
+                            <td>Silverest Estates</td>
+                            <td>Lusaka</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>100%</td>
+                            <td>
+                                <a href="#" class="action-btn"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="action-btn"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lilayi Tiling</td>
+                            <td>Private Residence</td>
+                            <td>Lusaka</td>
+                            <td><span class="status-badge status-progress">In Progress</span></td>
+                            <td>65%</td>
+                            <td>
+                                <a href="#" class="action-btn"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="action-btn"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ndola Housing</td>
+                            <td>Ndola City Council</td>
+                            <td>Ndola</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>20%</td>
+                            <td>
+                                <a href="#" class="action-btn"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="action-btn"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="table-card">
+                    <div class="section-title">
+                        <h4>Recent Messages</h4>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item border-0 d-flex align-items-center gap-3 py-3">
+                            <div class="profile-icon" style="width: 40px; height: 40px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">John Phiri</h6>
+                                <p class="text-muted small mb-0">Project inquiry for new construction...</p>
+                            </div>
+                            <small class="text-muted">2 min ago</small>
+                        </div>
+                        <div class="list-group-item border-0 d-flex align-items-center gap-3 py-3">
+                            <div class="profile-icon" style="width: 40px; height: 40px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">Mary Banda</h6>
+                                <p class="text-muted small mb-0">Request for quotation...</p>
+                            </div>
+                            <small class="text-muted">1 hour ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="table-card">
+                    <div class="section-title">
+                        <h4>Quick Actions</h4>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="addproject.html" class="quick-action-card">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>New Project</span>
+                        </a>
+                        <a href="#" class="quick-action-card">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Add Client</span>
+                        </a>
+                        <a href="#" class="quick-action-card">
+                            <i class="fas fa-file-export"></i>
+                            <span>Generate Report</span>
+                        </a>
+                        <a href="#" class="quick-action-card">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } 
+        from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBO1Qlu66KtqzC0XrnjgJyhoKLgOMUU1zo",
+            authDomain: "chiefengineering-49745.firebaseapp.com",
+            projectId: "chiefengineering-49745",
+            storageBucket: "chiefengineering-49745.firebasestorage.app",
+            messagingSenderId: "610373373596",
+            appId: "G-5FQLS2VMZZ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check authentication
+        onAuthStateChanged(auth, (user) => {
+            if (!user || user.email !== "martinmwisa3@gmail.com") {
+                window.location.href = "admin-login.html";
+            }
+        });
+
+        // Logout handler
+        document.getElementById("logoutBtn").addEventListener("click", (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => {
+                window.location.href = "index.html";
+            }).catch((error) => {
+                console.error("Logout error:", error);
+            });
+        });
+
+        // Optional: Add loading states
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate data loading
+            const stats = document.querySelectorAll('.stat-card');
+            // Add any dynamic data loading here
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chief Engineering Construction - Zambia's Leading Construction and Engineering Company">
+    <meta name="keywords" content="construction, engineering, building, Zambia, infrastructure">
+    <title>Chief Engineering Construction</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FQLS2VMZZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5FQLS2VMZZ');
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #D4AF37;
+            --primary-dark: #B8941F;
+            --dark: #0A0E14;
+            --light: #F8F9FA;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            padding-top: 76px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 14, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            color: var(--primary) !important;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--light) !important;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+          background-color: #B8941F;
+        }
+
+        /* ===== HERO SLIDER ===== */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Background images */
+        .slide:nth-child(1) {
+            background-image:
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)),
+                url('images/12.jpg');
+        }
+
+        .slide:nth-child(2) {
+            background-image:
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)),
+                url('images/images1.jpg');
+        }
+
+        .slide:nth-child(3) {
+            background-image:
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)),
+                url('images/images2.jpg');
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Buttons */
+        .btn-warning {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-warning:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Cards */
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .service-card h5 {
+            padding: 1.5rem 1.5rem 0.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            padding: 0 1.5rem 1.5rem;
+            color: #6c757d;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Team Cards */
+        .team-card {
+            border-radius: 15px;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Stats Box */
+        .stats-box {
+            background: linear-gradient(135deg, #1a1f2e, #0a0e14);
+        }
+
+        .counter {
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+        
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5) !important;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+        }
+
+        footer a {
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            color: var(--primary) !important;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--dark) !important;
+            transform: translateY(-3px);
+        }
+
+        /* Section Titles */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            margin: 1rem auto 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .counter {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(10, 14, 20, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+            
+            .nav-link::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Chief Engineering Construction</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin-login.html">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   <section class="hero-section d-flex align-items-center">
+
+    <!-- Slider Background -->
+    <div class="hero-slider">
+        <div class="slide active"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container text-center text-white hero-content">
+        <h1 class="display-2 fw-bold mb-4">Building Zambia's Future</h1>
+        <p class="lead fs-4 mb-5 mx-auto" style="max-width: 700px;">
+            Zambia's Leading Construction and Engineering Company Recognised For Quality, Innovation and Integrity
+        </p>
+
+        <a class="btn btn-warning btn-lg px-5 py-3 text-white"
+           href="Documents/Chief Engineering Limited Resources Profile.pdf" download>
+           <i class="fas fa-cloud-download-alt me-2"></i>Company Profile
+        </a>
+    </div>
+
+</section>
+
+
+    <!-- Services Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold section-title">What We Offer</h2>
+                <p class="lead text-muted">We deliver reliable engineering and construction solutions tailored to your needs.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <img src="images/2.jpeg" alt="Building Construction">
+                        <h5>Building Construction</h5>
+                        <p>Residential, commercial, and industrial construction built to the highest standards.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <img src="images/images2.jpg" alt="Renovation and Refurbishment">
+                        <h5>Renovation and Refurbishment</h5>
+                        <p>Expert renovation services to modernize and enhance existing structures.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <img src="images/images1.jpg" alt="Project Management">
+                        <h5>Project Management</h5>
+                        <p>Comprehensive oversight ensuring projects are delivered on time and within budget.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-box p-5 rounded-4 shadow-lg mt-5">
+                <div class="row g-4 text-center">
+                    <div class="col-md-3 col-6">
+                        <h2 class="display-3 fw-bold text-warning mb-2 counter" data-target="46">0</h2>
+                        <p class="text-white-50 mb-0">Projects Completed</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h2 class="display-3 fw-bold text-warning mb-2 counter" data-target="6">0</h2>
+                        <p class="text-white-50 mb-0">Years Experience</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h2 class="display-3 fw-bold text-warning mb-2 counter" data-target="46">0</h2>
+                        <p class="text-white-50 mb-0">Happy Clients</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h2 class="display-3 fw-bold text-warning mb-2 counter" data-target="72">0</h2>
+                        <p class="text-white-50 mb-0">Team Members</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold section-title">Featured Projects</h2>
+                <p class="lead text-muted">At Chief Engineering Construction, we deliver high-quality projects with precision, reliability, and excellence.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="overflow-hidden">
+                            <img src="images/paving.jpeg" alt="Paving in Silverest" class="img-fluid w-100">
+                        </div>
+                        <div class="p-4">
+                            <h6 class="fw-bold mb-2">Paving in Silverest</h6>
+                            <p class="small text-muted mb-0"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Lusaka</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="overflow-hidden">
+                            <img src="images/tillig.jpeg" alt="Tiling and Plumbing" class="img-fluid w-100">
+                        </div>
+                        <div class="p-4">
+                            <h6 class="fw-bold mb-2">Tiling and Plumbing in Lilayi</h6>
+                            <p class="small text-muted mb-0"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Lusaka Province</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="overflow-hidden">
+                            <img src="images/building.jpeg" alt="Residential Housing" class="img-fluid w-100">
+                        </div>
+                        <div class="p-4">
+                            <h6 class="fw-bold mb-2">Residential Housing</h6>
+                            <p class="small text-muted mb-0"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Ndola, Zambia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="project.html" class="btn btn-warning btn-lg px-5 py-3 rounded-3">
+                    View All Projects <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-dark mb-3 section-title">Our Team</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                    Our success depends on a strong team of dedicated and skilled professionals who ensure each project is completed to the highest standards
+                </p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-4">
+                            <div class="bg-primary bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                                <i class="bi bi-person-fill text-white fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-1">Eng. Martin Mwisa</h5>
+                            <p class="text-primary small fw-semibold mb-3">Company Director</p>
+                            <div>
+                                <a href="https://www.facebook.com/martin.banda.5872682" class="social-link text-black" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/martin-mwisa-b94b8b332/" class="social-link text-black" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-4">
+                            <div class="bg-success bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                                <i class="bi bi-person-fill text-white fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-1">Chileshe Chifumbano</h5>
+                            <p class="text-primary small fw-semibold mb-3">Assistant Director</p>
+                            <div>
+                                <a href="#" class="social-link text-black" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-link text-black" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-4">
+                            <div class="bg-warning bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                                <i class="bi bi-person-fill text-white fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-1">John Phiri</h5>
+                            <p class="text-primary small fw-semibold mb-3">Accountant</p>
+                            <div>
+                                <a href="#" class="social-link text-black" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-link text-black" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-4">
+                            <div class="bg-info bg-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 100px; height: 100px;">
+                                <i class="bi bi-person-fill text-white fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-1">Ridon Ngandu</h5>
+                            <p class="text-primary small fw-semibold mb-3">Architecture Engineer</p>
+                            <div>
+                                <a href="#" class="social-link text-black" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-link text-black" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.link/uvjg0r" class="whatsapp-float btn btn-success position-fixed bottom-0 end-0 m-4 rounded-circle shadow-lg" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Chief Engineering Construction</h5>
+                    <p class="text-secondary mb-3">Building your dreams with quality, safety, and integrity. Your trusted partner in construction excellence.</p>
+                    <div class="d-flex gap-2">
+                        <a href="https://www.facebook.com/profile.php?id=61565455101839" class="social-link text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link text-white" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <h6 class="fw-semibold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-secondary text-decoration-none"><i class="bi bi-chevron-right me-1"></i>Home</a></li>
+                        <li class="mb-2"><a href="service.html" class="text-secondary text-decoration-none"><i class="bi bi-chevron-right me-1"></i>Services</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-secondary text-decoration-none"><i class="bi bi-chevron-right me-1"></i>About Us</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-secondary text-decoration-none"><i class="bi bi-chevron-right me-1"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4">
+                    <h6 class="fw-semibold mb-3">Contact Us</h6>
+                    <p class="text-secondary mb-2"><i class="fas fa-phone text-warning me-2"></i><a href="tel:+260975479564" class="text-secondary text-decoration-none">+260 975 479 564</a></p>
+                    <p class="text-secondary mb-2"><i class="fas fa-envelope text-warning me-2"></i><a href="mailto:martinmwisa3@gmail.com" class="text-secondary text-decoration-none">martinmwisa3@gmail.com</a></p>
+                    <p class="text-secondary mb-0"><i class="fas fa-map-marker-alt text-warning me-2"></i>Lusaka, Zambia</p>
+                </div>
+            </div>
+
+            <hr class="border-secondary my-4">
+            <p class="text-center text-secondary small mb-0">
+                &copy; 2026 Chief Engineering Construction. All rights reserved | 
+                Designed by <a href="https://mwisa-the-dev-io.vercel.app/" class="text-warning text-decoration-none">Jones Mwisa</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+    const slides = document.querySelectorAll(".slide");
+    let index = 0;
+
+    function changeSlide() {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }
+
+    setInterval(changeSlide, 4000);
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="statics.js"></script>
+</body>
+</html>
