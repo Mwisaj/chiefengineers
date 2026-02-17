@@ -1,0 +1,421 @@
+:root {
+    --primary: #d4af37;
+    --primary-dark: #b8941f;
+    --dark: #0a0e14;
+    --dark-soft: #1a1f2e;
+    --gray: #8b92a6;
+    --gray-light: #a0b3c5;
+    --white: #ffffff;
+    --shadow-lg: 0 24px 42px -12px rgba(0,0,0,0.15);
+    --transition: all 0.3s ease;
+    --border-radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Background Pattern */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(212,175,55,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+    animation: slidePattern 20s linear infinite;
+}
+
+@keyframes slidePattern {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(40px); }
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo/Brand Section */
+.brand {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brand-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.brand-icon i {
+    font-size: 2.5rem;
+    color: var(--dark);
+}
+
+.brand h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+}
+
+.brand p {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+/* Form Elements */
+.form-label {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.form-control {
+    border: 2px solid #eef3f7;
+    border-radius: 12px;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    font-size: 1rem;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--gray-light);
+    font-size: 0.9rem;
+}
+
+/* Remember Me Checkbox */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-check-input {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+    border: 2px solid #eef3f7;
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-check-label {
+    color: var(--gray);
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Login Button */
+.btn-login {
+    background-color: var(--primary);
+    color: var(--dark);
+    border: none;
+    border-radius: 40px;
+    padding: 0.9rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: 0 8px 16px -6px rgba(212, 175, 55, 0.3);
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-login:hover {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -8px rgba(212, 175, 55, 0.4);
+}
+
+.btn-login i {
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.btn-login:hover i {
+    transform: translateX(5px);
+}
+
+/* Back to Site Link */
+.back-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.back-link a {
+    color: var(--gray-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.back-link a:hover {
+    color: var(--primary);
+}
+
+/* Alert Message */
+.alert {
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: none;
+}
+
+.alert.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Loading Spinner */
+.spinner {
+    display: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid var(--white);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.btn-login.loading .spinner {
+    display: inline-block;
+}
+
+.btn-login.loading span {
+    opacity: 0.7;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Password Toggle Icon */
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--gray);
+    z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .brand h2 {
+        font-size: 1.5rem;
+    }
+
+    .brand-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .brand-icon i {
+        font-size: 2rem;
+    }
+}
+
+/* Footer Credit */
+.credit {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--gray-light);
+    font-size: 0.85rem;
+    z-index: 1;
+}
+
+.credit a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.credit a:hover {
+    color: var(--primary-light);
+}
+/* Brand Section - Professional Design */
+.brand {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Logo Container */
+.brand-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Professional Logo Image Styling */
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+    transition: var(--transition);
+    background: var(--white);
+    padding: 4px; /* Creates a subtle border effect */
+    border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Optional: Add a subtle glow effect on hover */
+.brand:hover .logo-image {
+    transform: scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.3);
+}
+
+/* Brand Title */
+.brand-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.5px;
+}
+
+/* Brand Subtitle */
+.brand-subtitle {
+    color: var(--gray);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+}
+
+/* Decorative lines for subtitle (optional) */
+.brand-subtitle::before,
+.brand-subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 1px;
+    background: rgba(212, 175, 55, 0.3);
+}
+
+.brand-subtitle::before {
+    left: -15px;
+}
+
+.brand-subtitle::after {
+    right: -15px;
+}
