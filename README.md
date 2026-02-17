@@ -1,11 +1,11 @@
-📘 Chief Engineering Website
-🚀 Project Overview
+Chief Engineering Website
+Project Overview
 
-Chief Engineering Website is a professional, responsive web application designed to showcase the expertise, services, and portfolio of a Chief Engineer. The site highlights skills, experience, projects, services offered, client testimonials, and contact information — all in a modern, clean, and user-friendly interface.
+Chief Engineering Website is a professional, responsive web application designed to showcase the expertise, services, and portfolio of a Chief Engineer. The site highlights skills, experience, projects, services offered, and contact information — all in a modern, clean, and user-friendly interface.
 
 This project is perfect for engineers, technical professionals, or professionals who want a strong online presence.
 
-🧩 Features
+Features
 
 ✅ Responsive design (works on mobile, tablet & desktop)
 ✅ Clean modern layout with smooth navigation
