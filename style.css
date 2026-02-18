@@ -119,19 +119,19 @@ body {
 .slide:nth-child(1) {
     background-image:
         linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)),
-        url('images/12.jpg');
+        url('images//12.jpg');
 }
 
 .slide:nth-child(2) {
     background-image:
         linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)),
-        url('images/images1.jpg');
+        url('images//images1.jpg');
 }
 
 .slide:nth-child(3) {
     background-image:
         linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)),
-        url('images/images2.jpg');
+        url('images//images2.jpg');
 }
 
 .slide.active {
@@ -325,4 +325,5 @@ footer a:hover {
     .nav-link::after {
         display: none;
     }
+
 }
