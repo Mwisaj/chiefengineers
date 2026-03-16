@@ -88,7 +88,7 @@ loginForm.addEventListener("submit", async (e) => {
             
             // Redirect after short delay
             setTimeout(() => {
-                window.location.href = "admin-dashboard.html";
+                window.location.href = "messages.html";
             }, 1500);
         } else {
             // Not an admin - sign out and show error
